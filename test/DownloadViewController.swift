@@ -31,7 +31,7 @@ class DownloadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = UIColor.lightGray
         addView()
         autoLayout()
     }
@@ -44,7 +44,7 @@ class DownloadViewController: UIViewController {
     
     func autoLayout() {
         appImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        appImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        appImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         appImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
         appImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         

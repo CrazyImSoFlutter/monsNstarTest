@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         
         myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         myCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
-        myCollectionView?.backgroundColor = UIColor.gray
+        myCollectionView?.backgroundColor = UIColor.lightGray
         
         self.view = view
         
@@ -33,10 +33,14 @@ class ViewController: UIViewController {
     
     
     @objc func buttonAction(sender: UIButton!) {
-        let vc = StoreViewController()
-        vc.modalPresentationStyle = .fullScreen
+        let svc = StoreViewController()
+        let mvc = monsNstarViewController()
+        svc.modalPresentationStyle = .fullScreen
+        mvc.modalPresentationStyle = .fullScreen
         if sender.titleLabel?.text == "store" {
-            self.present(vc, animated: true, completion: nil)
+            self.present(svc, animated: true, completion: nil)
+        } else if sender.titleLabel?.text == "monSNStar" {
+            self.present(mvc, animated: true, completion: nil)
         }
         
     }

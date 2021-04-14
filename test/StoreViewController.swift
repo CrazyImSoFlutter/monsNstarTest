@@ -25,7 +25,8 @@ class StoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(self.storeView)
         
         view.backgroundColor = UIColor.gray
-        self.storeView.backgroundColor = UIColor.gray
+        self.storeView.backgroundColor = UIColor.lightGray
+        self.storeView.alwaysBounceVertical = false
 
         self.storeView.translatesAutoresizingMaskIntoConstraints = false
         self.storeView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
@@ -48,11 +49,43 @@ class StoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "app", for: indexPath) as! CustomTable
         if indexPath.section == 0 {
+            self.storeView.rowHeight = 175
+            cell.appImage.image = UIImage(named: "monSNStar_B")
+            cell.appLabel.font = UIFont.boldSystemFont(ofSize: 30)
+            cell.appLabel.text = "MONSNSTAR"
+            cell.appText.font = UIFont.boldSystemFont(ofSize: 20)
+            cell.appText.text = "드디어 출시!"
             
+            cell.appImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20).isActive = true
+            cell.appImage.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 20).isActive = true
+            cell.appImage.widthAnchor.constraint(equalToConstant: 125).isActive = true
+            cell.appImage.heightAnchor.constraint(equalToConstant: 125).isActive = true
+            
+            cell.appLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20).isActive = true
+            cell.appLabel.leadingAnchor.constraint(equalTo: cell.appImage.trailingAnchor, constant: 20).isActive = true
+            cell.appLabel.trailingAnchor.constraint(equalTo: cell.trailingAnchor).isActive = true
+            
+            cell.appText.topAnchor.constraint(equalTo: cell.appLabel.bottomAnchor, constant: 10).isActive = true
+            cell.appText.leadingAnchor.constraint(equalTo: cell.appImage.trailingAnchor, constant: 20).isActive = true
+            cell.appText.heightAnchor.constraint(equalTo: cell.appLabel.heightAnchor).isActive = true
         } else {
+            self.storeView.rowHeight = 100
             cell.appImage.image = UIImage(named: cellData[indexPath.row])
             cell.appLabel.text = cellData[indexPath.row]
             cell.appText.text = cellData[indexPath.row]
+            cell.appImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 0).isActive = true
+            cell.appImage.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 0).isActive = true
+            cell.appImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            cell.appImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            cell.appImage.layer.cornerRadius = 12
+            
+            cell.appLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
+            cell.appLabel.leadingAnchor.constraint(equalTo: cell.appImage.trailingAnchor, constant: 10).isActive = true
+            cell.appLabel.trailingAnchor.constraint(equalTo: cell.trailingAnchor).isActive = true
+            
+            cell.appText.topAnchor.constraint(equalTo: cell.appLabel.bottomAnchor, constant: 10).isActive = true
+            cell.appText.leadingAnchor.constraint(equalTo: cell.appImage.trailingAnchor, constant: 10).isActive = true
+            cell.appText.heightAnchor.constraint(equalTo: cell.appLabel.heightAnchor).isActive = true
         }
         return cell
     }
