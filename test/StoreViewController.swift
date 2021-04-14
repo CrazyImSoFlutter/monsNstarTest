@@ -8,7 +8,15 @@
 import UIKit
 
 class StoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let cellData = ["camera", "store", "settings", "monSNStar"]
+    let cellData = ["monSNStar", "news"]
+    let backButton: UIButton = {
+        let backButton = UIButton()
+        let image = UIImage(named: "back")
+        backButton.setImage(image, for: .normal)
+        backButton.addTarget(self, action: #selector(back(sender:)), for: .touchUpInside)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        return backButton
+    }()
     var storeView: UITableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
     
     
@@ -23,16 +31,22 @@ class StoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view = view
         self.storeView.rowHeight = 100
         self.view.addSubview(self.storeView)
+        self.view.addSubview(self.backButton)
         
-        view.backgroundColor = UIColor.gray
+        view.backgroundColor = UIColor.lightGray
         self.storeView.backgroundColor = UIColor.lightGray
         self.storeView.alwaysBounceVertical = false
-
         self.storeView.translatesAutoresizingMaskIntoConstraints = false
-        self.storeView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        
+        self.storeView.topAnchor.constraint(equalTo: self.backButton.bottomAnchor, constant: 30).isActive = true
         self.storeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         self.storeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         self.storeView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        
+        self.backButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50).isActive = true
+        self.backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        self.backButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        self.backButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -68,11 +82,13 @@ class StoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.appText.topAnchor.constraint(equalTo: cell.appLabel.bottomAnchor, constant: 10).isActive = true
             cell.appText.leadingAnchor.constraint(equalTo: cell.appImage.trailingAnchor, constant: 20).isActive = true
             cell.appText.heightAnchor.constraint(equalTo: cell.appLabel.heightAnchor).isActive = true
+            
         } else {
             self.storeView.rowHeight = 100
             cell.appImage.image = UIImage(named: cellData[indexPath.row])
             cell.appLabel.text = cellData[indexPath.row]
             cell.appText.text = cellData[indexPath.row]
+            
             cell.appImage.topAnchor.constraint(equalTo: cell.topAnchor, constant: 0).isActive = true
             cell.appImage.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 0).isActive = true
             cell.appImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -93,6 +109,12 @@ class StoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dvc : DownloadViewController = DownloadViewController()
         dvc.modalPresentationStyle = .fullScreen
+        dvc.appImage.image = UIImage(named: cellData[indexPath.row])
+        dvc.appLabel.text = cellData[indexPath.row]
         present(dvc, animated: true, completion: nil)
+    }
+    
+    @objc func back(sender: UIButton!) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
