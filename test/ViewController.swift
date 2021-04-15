@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     var myCollectionView: UICollectionView?
     let cellData = ["camera", "store", "settings", "monSNStar", "news"]
+    var playerName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,13 @@ class ViewController: UIViewController {
         if sender.titleLabel?.text == "store" {
             self.present(svc, animated: true, completion: nil)
         } else if sender.titleLabel?.text == "monSNStar" {
-            self.present(mvc, animated: true, completion: nil)
+            if playerName == nil {
+                self.present(mvc, animated: true, completion: nil)
+            } else {
+                let mmvc = monsNstarTabViewController()
+                mmvc.modalPresentationStyle = .fullScreen
+                present(mmvc, animated: true, completion: nil)
+            }
         }
         
     }
